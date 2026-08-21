@@ -1,0 +1,26 @@
+{
+	"id": "claude-code-rtk",
+	"version": "1.0.0",
+	"name": "Claude Code + rtk",
+	"description": "Installs the Claude Code CLI and the rtk token-optimizing output proxy into /usr/local/bin, with optional rtk<->Claude Code wiring for the remote user. Uses the native installer, so no Node.js is required.",
+	"documentationURL": "https://github.com/khannurien/devcontainer-features/tree/main/src/claude-code-rtk",
+	"options": {
+		"claudeVersion": {
+			"type": "string",
+			"proposals": ["stable", "latest"],
+			"default": "stable",
+			"description": "Claude Code version to install ('stable', 'latest', or a pinned version such as 2.1.238)."
+		},
+		"installRtk": {
+			"type": "boolean",
+			"default": true,
+			"description": "Install the rtk CLI proxy."
+		},
+		"rtkInitClaude": {
+			"type": "boolean",
+			"default": true,
+			"description": "Run 'rtk init -g' for the remote user to wire rtk into Claude Code. Ignored in practice when you bind-mount a host ~/.claude over the remote user's home."
+		}
+	},
+	"installsAfter": ["ghcr.io/devcontainers/features/common-utils"]
+}

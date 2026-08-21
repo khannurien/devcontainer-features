@@ -4,9 +4,10 @@ A collection of [dev container Features](https://containers.dev/implementors/fea
 
 ## Features
 
-| Feature                                | Description                                                        |
-| -------------------------------------- | ----------------------------------------------------------------- |
-| [`opencode-rtk`](./src/opencode-rtk)   | Installs the opencode AI coding agent CLI and the rtk output proxy. |
+| Feature                                    | Description                                                         |
+| ------------------------------------------ | ------------------------------------------------------------------- |
+| [`claude-code-rtk`](./src/claude-code-rtk) | Installs the Claude Code CLI and the rtk output proxy.              |
+| [`opencode-rtk`](./src/opencode-rtk)       | Installs the opencode AI coding agent CLI and the rtk output proxy. |
 
 ## Usage
 
@@ -29,5 +30,6 @@ public if you want to consume it from other repos without authentication.
 
 ```sh
 npm install -g @devcontainers/cli
+devcontainer features test -f claude-code-rtk -i mcr.microsoft.com/devcontainers/base:noble .
 devcontainer features test -f opencode-rtk -i mcr.microsoft.com/devcontainers/base:noble .
 ```
