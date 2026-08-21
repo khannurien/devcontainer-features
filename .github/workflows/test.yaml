@@ -13,14 +13,26 @@ jobs:
       - name: Install devcontainer CLI
         run: npm install -g @devcontainers/cli
 
-      - name: Test claude-code-rtk
-        run: devcontainer features test -f claude-code-rtk -i mcr.microsoft.com/devcontainers/base:noble .
+      - name: Test claude-code
+        run: devcontainer features test -f claude-code -i mcr.microsoft.com/devcontainers/base:noble .
+
+      - name: Test opencode
+        run: devcontainer features test -f opencode -i mcr.microsoft.com/devcontainers/base:noble .
+
+      - name: Test rtk
+        run: devcontainer features test -f rtk -i mcr.microsoft.com/devcontainers/base:noble .
 
       - name: Test claude-host-config
         run: devcontainer features test -f claude-host-config -i mcr.microsoft.com/devcontainers/base:noble .
 
-      - name: Test opencode-rtk
-        run: devcontainer features test -f opencode-rtk -i mcr.microsoft.com/devcontainers/base:noble .
-
       - name: Test opencode-host-config
         run: devcontainer features test -f opencode-host-config -i mcr.microsoft.com/devcontainers/base:noble .
+
+      - name: Test rtk-host-config
+        run: devcontainer features test -f rtk-host-config -i mcr.microsoft.com/devcontainers/base:noble .
+
+      - name: Test claude-code-rtk
+        run: devcontainer features test -f claude-code-rtk -i mcr.microsoft.com/devcontainers/base:noble .
+
+      - name: Test opencode-rtk
+        run: devcontainer features test -f opencode-rtk -i mcr.microsoft.com/devcontainers/base:noble .

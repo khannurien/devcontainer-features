@@ -1,0 +1,16 @@
+{
+	"id": "opencode",
+	"version": "1.0.0",
+	"name": "opencode",
+	"description": "Installs the opencode AI coding agent CLI into /usr/local/bin.",
+	"documentationURL": "https://github.com/khannurien/devcontainer-features/tree/main/src/opencode",
+	"options": {
+		"opencodeVersion": {
+			"type": "string",
+			"proposals": ["latest"],
+			"default": "latest",
+			"description": "opencode version to install ('latest' or a pinned version such as 1.17.9)."
+		}
+	},
+	"installsAfter": ["ghcr.io/devcontainers/features/common-utils"]
+}

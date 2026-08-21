@@ -12,7 +12,7 @@ echo "[claude-host-config] remote user: ${USERNAME} (${USER_HOME})"
 
 # Mount points, so the bind targets exist in the image rather than being
 # conjured as root-owned directories at container creation.
-mkdir -p /claude-host/claude /claude-host/rtk
+mkdir -p /claude-host/claude
 [ -e /claude-host/claude.json ] || : > /claude-host/claude.json
 
 link() {
@@ -28,9 +28,5 @@ link() {
 
 link /claude-host/claude "${USER_HOME}/.claude"
 link /claude-host/claude.json "${USER_HOME}/.claude.json"
-link /claude-host/rtk "${USER_HOME}/.config/rtk"
-
-# ~/.config may have been created by the mkdir above while running as root.
-chown "${USERNAME}" "${USER_HOME}/.config" 2>/dev/null || true
 
 echo "[claude-host-config] done."

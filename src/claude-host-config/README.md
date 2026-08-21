@@ -1,25 +1,24 @@
 # Claude Code host config (claude-host-config)
 
-Bind-mounts your **host** Claude Code and rtk config into the container and
+Bind-mounts your **host** Claude Code config into the container and
 links it into the remote user's home:
 
 | Host                | Container mount          | Symlinked to             |
 | ------------------- | ------------------------ | ------------------------ |
 | `~/.claude`         | `/claude-host/claude`    | `$HOME/.claude`          |
 | `~/.claude.json`    | `/claude-host/claude.json` | `$HOME/.claude.json`   |
-| `~/.config/rtk`     | `/claude-host/rtk`       | `$HOME/.config/rtk`      |
 
 The result: Claude Code inside the container is already signed in, with your
 global `CLAUDE.md`, your `settings.json` hooks, your plugins and your session
-history, and rtk uses your own filters. Everything is read-write, so history
-written in a container shows up on the host.
+history. Everything is read-write, so history written in a container shows up
+on the host.
 
 The indirection through `/claude-host` exists because a Feature cannot know the
 remote user's home directory at mount time — the symlinks are created at build
 time, when `_REMOTE_USER_HOME` *is* known.
 
-Pair it with [`claude-code-rtk`](../claude-code-rtk), which installs the actual
-binaries.
+Pair it with [`claude-code`](../claude-code), which installs the binary. For
+rtk's own settings and filters, add [`rtk-host-config`](../rtk-host-config).
 
 ## Intended usage: personal, not committed
 
@@ -33,7 +32,8 @@ buildable by everyone else:
 // VS Code user settings.json
 "dev.containers.defaultFeatures": {
     "ghcr.io/khannurien/devcontainer-features/claude-code-rtk:1": {},
-    "ghcr.io/khannurien/devcontainer-features/claude-host-config:1": {}
+    "ghcr.io/khannurien/devcontainer-features/claude-host-config:1": {},
+    "ghcr.io/khannurien/devcontainer-features/rtk-host-config:1": {}
 }
 ```
 
@@ -46,10 +46,10 @@ devcontainer up --workspace-folder . \
 
 ## Requirements
 
-- `~/.claude`, `~/.claude.json` and `~/.config/rtk` must **exist on the host**.
+- `~/.claude` and `~/.claude.json` must **exist on the host**.
   Docker creates a missing bind source as an empty *directory*, which would give
   you a `~/.claude.json` that is a directory — on the host as well as in the
-  container. Run Claude Code and rtk once locally first.
+  container. Run Claude Code once locally first.
 - The container user needs a matching uid (1000 in every
   `mcr.microsoft.com/devcontainers` image, which is also the usual Linux/WSL
   desktop uid) or the mounted files will not be writable.

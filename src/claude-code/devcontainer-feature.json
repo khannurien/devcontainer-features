@@ -1,0 +1,16 @@
+{
+	"id": "claude-code",
+	"version": "1.0.0",
+	"name": "Claude Code",
+	"description": "Installs the Claude Code CLI into /usr/local/bin using the official native installer, so no Node.js is required in the container.",
+	"documentationURL": "https://github.com/khannurien/devcontainer-features/tree/main/src/claude-code",
+	"options": {
+		"claudeVersion": {
+			"type": "string",
+			"proposals": ["stable", "latest"],
+			"default": "stable",
+			"description": "Claude Code version to install ('stable', 'latest', or a pinned version such as 2.1.238)."
+		}
+	},
+	"installsAfter": ["ghcr.io/devcontainers/features/common-utils"]
+}

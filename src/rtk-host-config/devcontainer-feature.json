@@ -1,0 +1,15 @@
+{
+	"id": "rtk-host-config",
+	"version": "1.0.0",
+	"name": "rtk host config",
+	"description": "Bind-mounts the host's ~/.config/rtk into the container and links it into the remote user's home, so rtk runs with your own settings and custom filters. Meant to be injected personally through the 'dev.containers.defaultFeatures' setting rather than committed to a shared devcontainer.json.",
+	"documentationURL": "https://github.com/khannurien/devcontainer-features/tree/main/src/rtk-host-config",
+	"mounts": [
+		{
+			"source": "${localEnv:HOME}/.config/rtk",
+			"target": "/rtk-host/config",
+			"type": "bind"
+		}
+	],
+	"installsAfter": ["ghcr.io/devcontainers/features/common-utils"]
+}

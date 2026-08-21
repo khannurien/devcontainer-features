@@ -16,8 +16,5 @@
 			"type": "bind"
 		}
 	],
-	"installsAfter": [
-		"ghcr.io/khannurien/devcontainer-features/opencode-rtk",
-		"ghcr.io/devcontainers/features/common-utils"
-	]
+	"installsAfter": ["ghcr.io/devcontainers/features/common-utils"]
 }

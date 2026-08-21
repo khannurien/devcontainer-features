@@ -1,26 +1,13 @@
 {
 	"id": "opencode-rtk",
-	"version": "1.0.0",
+	"version": "2.0.0",
 	"name": "opencode + rtk",
-	"description": "Installs the opencode AI coding agent CLI and the rtk token-optimizing output proxy into /usr/local/bin, with optional rtk<->opencode wiring for the remote user.",
+	"description": "Convenience Feature: installs both opencode and rtk by depending on the 'opencode' and 'rtk' Features. Use those directly if you need to pin versions.",
 	"documentationURL": "https://github.com/khannurien/devcontainer-features/tree/main/src/opencode-rtk",
-	"options": {
-		"opencodeVersion": {
-			"type": "string",
-			"proposals": ["latest"],
-			"default": "latest",
-			"description": "opencode version to install ('latest' or a pinned version such as 1.17.9)."
-		},
-		"installRtk": {
-			"type": "boolean",
-			"default": true,
-			"description": "Install the rtk CLI proxy."
-		},
-		"rtkInitOpencode": {
-			"type": "boolean",
-			"default": true,
-			"description": "Run 'rtk init -g --opencode' for the remote user to wire rtk into opencode."
+	"dependsOn": {
+		"ghcr.io/khannurien/devcontainer-features/opencode:1": {},
+		"ghcr.io/khannurien/devcontainer-features/rtk:1": {
+			"init": "opencode"
 		}
-	},
-	"installsAfter": ["ghcr.io/devcontainers/features/common-utils"]
+	}
 }

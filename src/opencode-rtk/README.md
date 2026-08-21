@@ -1,42 +1,39 @@
 # opencode + rtk (opencode-rtk)
 
-Installs the [opencode](https://opencode.ai) AI coding agent CLI and the
-[rtk](https://github.com/rtk-ai/rtk) token-optimizing output proxy into
-`/usr/local/bin`, so both are available to every user inside the container.
-Optionally runs `rtk init -g --opencode` for the remote user to wire rtk into
-opencode.
-
-## Example usage
+Convenience Feature. It installs nothing itself — it declares `dependsOn` on
+[`opencode`](../opencode) and [`rtk`](../rtk) (with `init: opencode`), so adding
+this one line gets you both:
 
 ```jsonc
 "features": {
-    "ghcr.io/khannurien/devcontainer-features/opencode-rtk:1": {}
+    "ghcr.io/khannurien/devcontainer-features/opencode-rtk:2": {}
 }
 ```
 
-## Options
-
-| Option            | Type    | Default  | Description                                                          |
-| ----------------- | ------- | -------- | ------------------------------------------------------------------- |
-| `opencodeVersion` | string  | `latest` | opencode version to install (`latest` or a pinned version).         |
-| `installRtk`      | boolean | `true`   | Install the rtk CLI proxy.                                          |
-| `rtkInitOpencode` | boolean | `true`   | Run `rtk init -g --opencode` for the remote user.                  |
-
-## Pin a version
+Equivalent to:
 
 ```jsonc
 "features": {
-    "ghcr.io/khannurien/devcontainer-features/opencode-rtk:1": {
-        "opencodeVersion": "1.17.9"
-    }
+    "ghcr.io/khannurien/devcontainer-features/opencode:1": {},
+    "ghcr.io/khannurien/devcontainer-features/rtk:1": { "init": "opencode" }
 }
 ```
 
-## Notes
+## No options — breaking change in 2.0.0
 
-- Binaries land in `/usr/local/bin`, independent of the container user.
-- This Feature installs the tools; it does not provide opencode's config or
-  credentials. Supply provider API keys via `remoteEnv`/`containerEnv`, or use
-  the companion [`opencode-host-config`](../opencode-host-config) Feature to
-  bind-mount your host `~/.config/opencode` and `~/.local/state/opencode` into
-  the container.
+Version 1.x was self-contained and took `opencodeVersion`, `installRtk` and
+`rtkInitOpencode` options. A Feature cannot forward its own option values into
+`dependsOn` (that block is static metadata), so 2.0.0 drops them: to pin a
+version, use `opencode` and `rtk` directly, as in the expansion above.
+
+`ghcr.io/khannurien/devcontainer-features/opencode-rtk:1` still resolves to the
+old self-contained 1.0.0 and is unaffected — but note that its `rtkInitOpencode`
+step never actually worked: it called `rtk init -g --opencode` without creating
+`~/.claude` first and without `--auto-patch`, so rtk exited 1 and the failure was
+swallowed as non-fatal. 2.0.0 fixes that by way of the `rtk` Feature.
+
+## See also
+
+- [`opencode-host-config`](../opencode-host-config) — your providers, plugins,
+  selected model and prompt history.
+- [`rtk-host-config`](../rtk-host-config) — use your own rtk filters.

@@ -59,9 +59,11 @@ The `devcontainer` CLI equivalent is `--additional-features`.
 - The container user needs a matching uid (1000 in every
   `mcr.microsoft.com/devcontainers` image) or the mounted files will not be
   writable.
-- `rtk init -g --opencode` from the `opencode-rtk` Feature writes
-  `~/.config/opencode` at build time; this Feature installs after it and
-  replaces that directory with the symlink, so your host config wins.
+- Your host config always wins over anything written at build time, in either
+  install order: if `rtk init -g --opencode` runs first, this Feature replaces
+  the directory it wrote with the symlink; if it runs second, it writes into
+  `/opencode-host/config` in the image layer, which the bind mount then shadows
+  at runtime.
 - If your `opencode.json` points at a provider on `localhost` (a local
   llama.cpp or Ollama server, say), the container needs
   `"runArgs": ["--network=host"]` to reach it.

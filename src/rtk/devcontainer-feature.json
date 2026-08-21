@@ -1,0 +1,26 @@
+{
+	"id": "rtk",
+	"version": "1.0.0",
+	"name": "rtk",
+	"description": "Installs the rtk (Rust Token Killer) token-optimizing CLI proxy into /usr/local/bin, and optionally wires it into the coding agents present in the container.",
+	"documentationURL": "https://github.com/khannurien/devcontainer-features/tree/main/src/rtk",
+	"options": {
+		"rtkVersion": {
+			"type": "string",
+			"proposals": ["latest"],
+			"default": "latest",
+			"description": "rtk version to install ('latest' or a release tag such as v0.45.0)."
+		},
+		"init": {
+			"type": "string",
+			"enum": ["auto", "none", "claude-code", "opencode", "both"],
+			"default": "auto",
+			"description": "Which agents to wire rtk into for the remote user. 'auto' wires up whichever of claude / opencode is on PATH."
+		}
+	},
+	"installsAfter": [
+		"ghcr.io/khannurien/devcontainer-features/claude-code",
+		"ghcr.io/khannurien/devcontainer-features/opencode",
+		"ghcr.io/devcontainers/features/common-utils"
+	]
+}
