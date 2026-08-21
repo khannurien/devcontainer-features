@@ -1,0 +1,28 @@
+{
+	"id": "claude-host-config",
+	"version": "1.0.0",
+	"name": "Claude Code host config",
+	"description": "Bind-mounts the host's ~/.claude, ~/.claude.json and ~/.config/rtk into the container and links them into the remote user's home, so Claude Code and rtk run with your own credentials, memory, hooks, plugins and history. Meant to be injected personally through the 'dev.containers.defaultFeatures' setting rather than committed to a shared devcontainer.json.",
+	"documentationURL": "https://github.com/khannurien/devcontainer-features/tree/main/src/claude-host-config",
+	"mounts": [
+		{
+			"source": "${localEnv:HOME}/.claude",
+			"target": "/claude-host/claude",
+			"type": "bind"
+		},
+		{
+			"source": "${localEnv:HOME}/.claude.json",
+			"target": "/claude-host/claude.json",
+			"type": "bind"
+		},
+		{
+			"source": "${localEnv:HOME}/.config/rtk",
+			"target": "/claude-host/rtk",
+			"type": "bind"
+		}
+	],
+	"installsAfter": [
+		"ghcr.io/khannurien/devcontainer-features/claude-code-rtk",
+		"ghcr.io/devcontainers/features/common-utils"
+	]
+}

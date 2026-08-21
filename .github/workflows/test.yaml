@@ -16,5 +16,8 @@ jobs:
       - name: Test claude-code-rtk
         run: devcontainer features test -f claude-code-rtk -i mcr.microsoft.com/devcontainers/base:noble .
 
+      - name: Test claude-host-config
+        run: devcontainer features test -f claude-host-config -i mcr.microsoft.com/devcontainers/base:noble .
+
       - name: Test opencode-rtk
         run: devcontainer features test -f opencode-rtk -i mcr.microsoft.com/devcontainers/base:noble .
