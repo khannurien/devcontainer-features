@@ -36,5 +36,7 @@ opencode.
 
 - Binaries land in `/usr/local/bin`, independent of the container user.
 - This Feature installs the tools; it does not provide opencode's config or
-  credentials. Mount those separately (e.g. bind-mount `~/.config/opencode`)
-  and supply provider API keys via `remoteEnv`/`containerEnv`.
+  credentials. Supply provider API keys via `remoteEnv`/`containerEnv`, or use
+  the companion [`opencode-host-config`](../opencode-host-config) Feature to
+  bind-mount your host `~/.config/opencode` and `~/.local/state/opencode` into
+  the container.

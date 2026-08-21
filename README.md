@@ -4,11 +4,12 @@ A collection of [dev container Features](https://containers.dev/implementors/fea
 
 ## Features
 
-| Feature                                          | Description                                                           |
-| ------------------------------------------------ | --------------------------------------------------------------------- |
-| [`claude-code-rtk`](./src/claude-code-rtk)       | Installs the Claude Code CLI and the rtk output proxy.                |
-| [`claude-host-config`](./src/claude-host-config) | Bind-mounts the host's Claude Code and rtk config into the container. |
-| [`opencode-rtk`](./src/opencode-rtk)             | Installs the opencode AI coding agent CLI and the rtk output proxy.   |
+| Feature                                              | Description                                                           |
+| ---------------------------------------------------- | --------------------------------------------------------------------- |
+| [`claude-code-rtk`](./src/claude-code-rtk)           | Installs the Claude Code CLI and the rtk output proxy.                |
+| [`claude-host-config`](./src/claude-host-config)     | Bind-mounts the host's Claude Code and rtk config into the container. |
+| [`opencode-rtk`](./src/opencode-rtk)                 | Installs the opencode AI coding agent CLI and the rtk output proxy.   |
+| [`opencode-host-config`](./src/opencode-host-config) | Bind-mounts the host's opencode config into the container.            |
 
 ## Usage
 

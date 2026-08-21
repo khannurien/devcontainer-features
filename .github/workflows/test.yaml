@@ -21,3 +21,6 @@ jobs:
 
       - name: Test opencode-rtk
         run: devcontainer features test -f opencode-rtk -i mcr.microsoft.com/devcontainers/base:noble .
+
+      - name: Test opencode-host-config
+        run: devcontainer features test -f opencode-host-config -i mcr.microsoft.com/devcontainers/base:noble .

@@ -1,0 +1,23 @@
+{
+	"id": "opencode-host-config",
+	"version": "1.0.0",
+	"name": "opencode host config",
+	"description": "Bind-mounts the host's ~/.config/opencode and ~/.local/state/opencode into the container and links them into the remote user's home, so opencode runs with your own providers, plugins, selected model and prompt history. Meant to be injected personally through the 'dev.containers.defaultFeatures' setting rather than committed to a shared devcontainer.json.",
+	"documentationURL": "https://github.com/khannurien/devcontainer-features/tree/main/src/opencode-host-config",
+	"mounts": [
+		{
+			"source": "${localEnv:HOME}/.config/opencode",
+			"target": "/opencode-host/config",
+			"type": "bind"
+		},
+		{
+			"source": "${localEnv:HOME}/.local/state/opencode",
+			"target": "/opencode-host/state",
+			"type": "bind"
+		}
+	],
+	"installsAfter": [
+		"ghcr.io/khannurien/devcontainer-features/opencode-rtk",
+		"ghcr.io/devcontainers/features/common-utils"
+	]
+}
