@@ -12,7 +12,7 @@ echo "[opencode-host-config] remote user: ${USERNAME} (${USER_HOME})"
 
 # Mount points, so the bind targets exist in the image rather than being
 # conjured as root-owned directories at container creation.
-mkdir -p /opencode-host/config /opencode-host/state
+mkdir -p /opencode-host/config /opencode-host/state /opencode-host/data
 
 link() {
 	local target="$1" link="$2"
@@ -27,8 +27,10 @@ link() {
 
 link /opencode-host/config "${USER_HOME}/.config/opencode"
 link /opencode-host/state "${USER_HOME}/.local/state/opencode"
+link /opencode-host/data "${USER_HOME}/.local/share/opencode"
 
 # These may have been created by the mkdir above while running as root.
-chown "${USERNAME}" "${USER_HOME}/.config" "${USER_HOME}/.local" "${USER_HOME}/.local/state" 2>/dev/null || true
+chown "${USERNAME}" "${USER_HOME}/.config" "${USER_HOME}/.local" \
+	"${USER_HOME}/.local/state" "${USER_HOME}/.local/share" 2>/dev/null || true
 
 echo "[opencode-host-config] done."
