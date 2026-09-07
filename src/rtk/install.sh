@@ -74,28 +74,39 @@ case "${INIT}" in
 	opencode)    init_opencode=true ;;
 	both)        init_claude=true; init_opencode=true ;;
 	auto)
-		command -v claude   >/dev/null 2>&1 && init_claude=true
-		command -v opencode >/dev/null 2>&1 && init_opencode=true
+		# Both agents install themselves under the remote user's home (the only
+		# place their updaters write), so neither is guaranteed to be on root's
+		# PATH here, symlink in /usr/local/bin or not.
+		{ command -v claude   >/dev/null 2>&1 || [ -e "${USER_HOME}/.local/bin/claude" ];    } && init_claude=true
+		{ command -v opencode >/dev/null 2>&1 || [ -e "${USER_HOME}/.opencode/bin/opencode" ]; } && init_opencode=true
 		;;
 	*)
 		echo "[rtk] unknown init value '${INIT}', treating as 'none'" >&2
 		;;
 esac
 
-# 'rtk init --opencode' means "opencode in addition to Claude Code", so a single
-# invocation covers both and there is no opencode-only mode.
+# 'rtk init --opencode' is documented as "in addition to Claude Code", but as of
+# rtk 0.48.0 it only installs the opencode plugin: it leaves settings.json
+# untouched and writes no RTK.md. So the two agents get one invocation each
+# rather than relying on a single run to cover both. The opencode run still
+# needs ~/.claude to exist, because rtk exits 1 when the agent config directory
+# is missing.
 if [ "${init_opencode}" = true ]; then
-	echo "[rtk] wiring rtk into opencode (and Claude Code) for ${USERNAME}"
+	echo "[rtk] wiring rtk into opencode for ${USERNAME}"
 	prepare_dir "${USER_HOME}/.claude"
 	prepare_dir "${USER_HOME}/.config/opencode"
 	run_as_user /usr/local/bin/rtk init -g --opencode --auto-patch --no-trust-filters \
-		|| echo "[rtk] rtk init failed (non-fatal)"
-elif [ "${init_claude}" = true ]; then
+		|| echo "[rtk] rtk init --opencode failed (non-fatal)"
+fi
+
+if [ "${init_claude}" = true ]; then
 	echo "[rtk] wiring rtk into Claude Code for ${USERNAME}"
 	prepare_dir "${USER_HOME}/.claude"
 	run_as_user /usr/local/bin/rtk init -g --auto-patch --no-trust-filters \
 		|| echo "[rtk] rtk init failed (non-fatal)"
-else
+fi
+
+if [ "${init_opencode}" = false ] && [ "${init_claude}" = false ]; then
 	echo "[rtk] no agent wiring (init=${INIT})"
 fi
 
