@@ -16,7 +16,7 @@
 # it can never be the stale one.
 set -euo pipefail
 
-CLAUDE_VERSION="${CLAUDEVERSION:-stable}"
+CLAUDE_VERSION="${CLAUDEVERSION:-latest}"
 
 # Provided by the dev container build for the user the container runs as.
 USERNAME="${_REMOTE_USER:-root}"

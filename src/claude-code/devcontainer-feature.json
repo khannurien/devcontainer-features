@@ -1,6 +1,6 @@
 {
 	"id": "claude-code",
-	"version": "1.1.0",
+	"version": "1.2.0",
 	"name": "Claude Code",
 	"description": "Installs the Claude Code CLI for the remote user with the official native installer, so no Node.js is required in the container. Uses Claude Code's own $HOME layout, so 'claude update' works inside the container instead of leaving a second, stale copy behind.",
 	"documentationURL": "https://github.com/khannurien/devcontainer-features/tree/main/src/claude-code",
@@ -8,7 +8,7 @@
 		"claudeVersion": {
 			"type": "string",
 			"proposals": ["stable", "latest"],
-			"default": "stable",
+			"default": "latest",
 			"description": "Claude Code version to install ('stable', 'latest', or a pinned version such as 2.1.238)."
 		}
 	},

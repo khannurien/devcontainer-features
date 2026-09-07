@@ -19,10 +19,16 @@ unlike an `npm install -g @anthropic-ai/claude-code`, which is what the upstream
 
 | Option          | Type   | Default  | Description                                                              |
 | --------------- | ------ | -------- | ------------------------------------------------------------------------ |
-| `claudeVersion` | string | `stable` | Version to install (`stable`, `latest`, or a pinned version).             |
+| `claudeVersion` | string | `latest` | Version to install (`stable`, `latest`, or a pinned version).             |
 
 ## Notes
 
+- `stable` and `latest` are Claude Code's own release channels, and `stable`
+  lags. Check what each resolves to with
+  `curl https://downloads.claude.ai/claude-code-releases/stable`. The default is
+  `latest`, because Claude Code's background updater tracks `latest` anyway: a
+  `stable` install is overtaken within minutes of first use, which only makes
+  the container look outdated at startup.
 - The install goes to `$HOME/.local/share/claude/versions/`, with a launcher
   symlink at `$HOME/.local/bin/claude`. `claude update` and `claude install`
   work inside the container and replace it in place.
