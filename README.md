@@ -25,7 +25,7 @@ Add a Feature to any project's `.devcontainer/devcontainer.json`:
 
 ```jsonc
 "features": {
-    "ghcr.io/khannurien/devcontainer-features/opencode-rtk:1": {}
+    "ghcr.io/khannurien/devcontainer-features/opencode-rtk:2": {}
 }
 ```
 
@@ -35,7 +35,7 @@ put it in your VS Code **user** settings instead — the project's own
 
 ```jsonc
 "dev.containers.defaultFeatures": {
-    "ghcr.io/khannurien/devcontainer-features/claude-code-rtk:1": {},
+    "ghcr.io/khannurien/devcontainer-features/claude-code-rtk:2": {},
     "ghcr.io/khannurien/devcontainer-features/claude-host-config:1": {},
     "ghcr.io/khannurien/devcontainer-features/rtk-host-config:1": {}
 }

@@ -68,7 +68,7 @@ option — anyone who adds this Feature gets them. So don't commit it to a share
 ```jsonc
 // VS Code user settings.json
 "dev.containers.defaultFeatures": {
-    "ghcr.io/khannurien/devcontainer-features/opencode-rtk:1": {},
+    "ghcr.io/khannurien/devcontainer-features/opencode-rtk:2": {},
     "ghcr.io/khannurien/devcontainer-features/opencode-host-config:1": {}
 }
 ```

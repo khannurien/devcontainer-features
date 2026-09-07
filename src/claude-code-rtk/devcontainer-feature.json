@@ -1,6 +1,6 @@
 {
 	"id": "claude-code-rtk",
-	"version": "1.0.0",
+	"version": "2.0.0",
 	"name": "Claude Code + rtk",
 	"description": "Convenience Feature: installs both Claude Code and rtk by depending on the 'claude-code' and 'rtk' Features. Use those directly if you need to pin versions.",
 	"documentationURL": "https://github.com/khannurien/devcontainer-features/tree/main/src/claude-code-rtk",

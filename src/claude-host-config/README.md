@@ -91,7 +91,7 @@ buildable by everyone else:
 ```jsonc
 // VS Code user settings.json
 "dev.containers.defaultFeatures": {
-    "ghcr.io/khannurien/devcontainer-features/claude-code-rtk:1": {},
+    "ghcr.io/khannurien/devcontainer-features/claude-code-rtk:2": {},
     "ghcr.io/khannurien/devcontainer-features/claude-host-config:1": {},
     "ghcr.io/khannurien/devcontainer-features/rtk-host-config:1": {}
 }
